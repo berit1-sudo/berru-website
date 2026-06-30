@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photography – Berit Raun</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="container-page">
+  <div class="header-left-page">
+    <a href="index.html" class="home-link">Berit Raun</a>
+  </div>
+  <div class="header-right-page"><a href="index.html" class="home-link">Portfolio</a></div>
+</header>
+
+<div class="content-wrapper">
+  <div class="description">
+    <div class="header-page">Photography works</div>
+    <h3>Photography · Personal project · 2022–2025</h3>
+    <p>A small selection of photographs taken in the streets of Tallinn and Rakvere and various snowparks of Estonia. Most of the photography portrays local riders and close friends but a lot of them are from galleries for snowboarding competitions around Estonia.</p>
+  </div>
+
+  <div class="photos-scroll">
+    <img src="Kikas.png" alt="Lift" class="landscape">
+    <img src="kikas 3.jpg" alt="Ranno Ruka">
+    <img src="kikas 5.jpg" alt="Ranno Ruka">
+    <img src="kikas 4.jpg" alt="Gregor Nomme" class="landscape">
+    <!-- TODO: HOST EXTERNALLY — rakvere3.jpg ~41MB, needs external hosting -->
+    <!-- TODO: HOST EXTERNALLY — rakvere4.jpg ~43MB, needs external hosting -->
+    <img src="mustvalge.jpg" alt="Marko sequence" class="landscape">
+    <!-- TODO: HOST EXTERNALLY — 4.jpg ~23MB, needs external hosting -->
+    <img src="Valgekas 1.JPG" alt="Valgekas 1">
+    <img src="Valgekas 2.JPG" alt="Valgekas 2">
+    <img src="VALGEKAS 3.JPG" alt="Valgekas 3">
+    <img src="valgekas skate.JPG" alt="Valgekas skate">
+    <img src="VILJANDI 1.JPG" alt="Viljandi 1">
+    <img src="Viljandi 2.JPG" alt="viljandi 2">
+    <img src="Kumu g 1.JPG" alt="Greks kumu" class="landscape">
+    <img src="Männiku1 .JPG" alt="Männiku 1">
+    <img src="männiku 2.jpg" alt="Männiku 2">
+    
+  </div>
+</div>
+
+<footer class="container-footer">
+  <div class="footer-content">
+    <div class="footer-row">
+      <div class="footer-nav-prev">
+        <a href="Trinkets.html" class="previous">&lt; Previous</a>
+      </div>
+      <div class="footer-contacts">
+        <a href="http://www.instagram.com/beritraun/" class="instagram">@beritraun</a>
+        <a href="mailto:beritraun1@gmail.com" class="mail">beritraun1@gmail.com</a>
+      </div>
+      <div class="footer-nav-next">
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <span class="lightbox-prev">
+    <svg width="30" height="50" viewBox="0 0 30 50">
+      <polyline points="25,5 5,25 25,45" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </span>
+  <span class="lightbox-next">
+    <svg width="30" height="50" viewBox="0 0 30 50">
+      <polyline points="5,5 25,25 5,45" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </span>
+  <img class="lightbox-content" id="lightbox-img" alt="">
+</div>
+
+<script>
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const scrollImages = document.querySelectorAll('.photos-scroll img');
+const closeBtn = document.querySelector('.lightbox-close');
+const prevBtn = document.querySelector('.lightbox-prev');
+const nextBtn = document.querySelector('.lightbox-next');
+let currentIndex = 0;
+
+scrollImages.forEach((img, index) => {
+  img.style.cursor = 'pointer';
+  img.addEventListener('click', function(e) {
+    e.stopPropagation();
+    currentIndex = index;
+    openLightbox();
+  });
+});
+
+function openLightbox() {
+  lightbox.style.display = 'flex';
+  lightboxImg.src = scrollImages[currentIndex].src;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+function showPrev() {
+  currentIndex = (currentIndex - 1 + scrollImages.length) % scrollImages.length;
+  lightboxImg.src = scrollImages[currentIndex].src;
+}
+
+function showNext() {
+  currentIndex = (currentIndex + 1) % scrollImages.length;
+  lightboxImg.src = scrollImages[currentIndex].src;
+}
+
+closeBtn.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', function(e) {
+  if (e.target === lightbox) closeLightbox();
+});
+prevBtn.addEventListener('click', function(e) { e.stopPropagation(); showPrev(); });
+nextBtn.addEventListener('click', function(e) { e.stopPropagation(); showNext(); });
+
+document.addEventListener('keydown', function(e) {
+  if (lightbox.style.display === 'flex') {
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') showPrev();
+    else if (e.key === 'ArrowRight') showNext();
+  }
+});
+
+lightbox.addEventListener('wheel', function(e) {
+  e.preventDefault();
+  if (e.deltaY > 0) showNext(); else showPrev();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>"Trinkets" – Berit Raun</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="container-page">
+  <div class="header-left-page">
+    <a href="index.html" class="home-link">Berit Raun</a>
+  </div>
+  <div class="header-right-page"><a href="index.html" class="home-link">Portfolio</a></div>
+</header>
+
+<div class="content-wrapper">
+  <div class="description">
+    <div class="header-page">A short snowboard film "Trinkets"</div>
+    <h3>Film · Personal project · Filmer, editor & graphic designer · 2023—2024</h3>
+    <p>"Trinkets" is a two-year introduction to street snowboarding by our small crew, Heatwave. The film captures what it really looked like to be young and driven, getting to spots on local buses, our parents' cars, and our own two feet, with no sponsors, no budget, and no safety net beyond the hype and support of our friends.</p>
+    <p>We went into it with minimal knowledge of street snowboarding's process and unwritten rules, but we went anyway. Looking back, that stubbornness is exactly what the film is about. These clips are a time capsule of early dedication, proof that the love for snowboarding was enough to get us out the door.</p>
+    <p>The name "Trinkets" reflects just that, being kids still, this was a small project, and the clips we collected were few. But they're ours, and they mean a lot. The film premiered at the Telliskivi Railjam in Estonia, warming up for Teamperfectlanding Bakhmaro and Yes Snowboards' Cream Week premiere, a moment that felt bigger than anything we could have imagined when we first started filming.</p>
+    <p>For this project I served as second filmer, photographer, second editor, and graphic designer.</p>
+  </div>
+
+  <div class="photos-scroll" id="photosScroll" >
+    <!-- TODO: HOST EXTERNALLY — hindamistele.mp4 ~88MB film teaser, needs external hosting (YouTube/Vimeo embed or CDN) -->
+    <img src="Trinkets.png" alt="Kumuidentity4" class="landscape">
+    <img src="Grex kumu.png" alt="Grex kumu" class="landscape">
+    <img src="Mustakas.png" alt="Mustamäe" class="landscape">
+    <img src="Grex kumu.png" alt="Kumuidentity4" class="landscape">
+    <img src="Grex.png" alt="Grex" class="landscape">
+  </div>
+</div>
+
+<footer class="container-footer">
+  <div class="footer-content">
+    <div class="footer-row">
+      <div class="footer-nav-prev">
+        <a href="ERKI identity.html" class="previous">&lt; Previous</a>
+      </div>
+      <div class="footer-contacts">
+        <a href="http://www.instagram.com/beritraun/" class="instagram">@beritraun</a>
+        <a href="mailto:beritraun1@gmail.com" class="mail">beritraun1@gmail.com</a>
+      </div>
+      <div class="footer-nav-next">
+        <a href="Misc.html" class="next">next &gt;</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <span class="lightbox-prev">
+    <svg width="30" height="50" viewBox="0 0 30 50">
+      <polyline points="25,5 5,25 25,45" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </span>
+  <span class="lightbox-next">
+    <svg width="30" height="50" viewBox="0 0 30 50">
+      <polyline points="5,5 25,25 5,45" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </span>
+  <img class="lightbox-content" id="lightbox-img" alt="">
+</div>
+
+<script>
+var lightbox = document.getElementById('lightbox');
+var lightboxImg = document.getElementById('lightbox-img');
+var closeBtn = document.querySelector('.lightbox-close');
+var prevBtn = document.querySelector('.lightbox-prev');
+var nextBtn = document.querySelector('.lightbox-next');
+var srcs = [];
+var currentIndex = 0;
+
+window.onload = function() {
+  var imgs = document.querySelectorAll('#photosScroll img');
+  srcs = [];
+  for (var i = 0; i < imgs.length; i++) {
+    srcs.push(imgs[i].getAttribute('src'));
+    (function(idx) {
+      imgs[idx].style.cursor = 'pointer';
+      imgs[idx].addEventListener('click', function() {
+        currentIndex = idx;
+        lightboxImg.src = srcs[currentIndex];
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    })(i);
+  }
+};
+
+closeBtn.addEventListener('click', function() {
+  lightbox.style.display = 'none';
+  document.body.style.overflow = '';
+});
+
+lightbox.addEventListener('click', function(e) {
+  if (e.target === lightbox) {
+    lightbox.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+});
+
+prevBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  currentIndex = (currentIndex - 1 + srcs.length) % srcs.length;
+  lightboxImg.src = srcs[currentIndex];
+});
+
+nextBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  currentIndex = (currentIndex + 1) % srcs.length;
+  lightboxImg.src = srcs[currentIndex];
+});
+
+document.addEventListener('keydown', function(e) {
+  if (lightbox.style.display === 'flex') {
+    if (e.key === 'Escape') { lightbox.style.display = 'none'; document.body.style.overflow = ''; }
+    else if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + srcs.length) % srcs.length; lightboxImg.src = srcs[currentIndex]; }
+    else if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % srcs.length; lightboxImg.src = srcs[currentIndex]; }
+  }
+});
+
+lightbox.addEventListener('wheel', function(e) {
+  e.preventDefault();
+  if (e.deltaY > 0) { currentIndex = (currentIndex + 1) % srcs.length; lightboxImg.src = srcs[currentIndex]; }
+  else { currentIndex = (currentIndex - 1 + srcs.length) % srcs.length; lightboxImg.src = srcs[currentIndex]; }
+});
+</script>
+
+</body>
+</html>

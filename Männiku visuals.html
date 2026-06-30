@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Männiku Wakepark CVI – Berit Raun</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="container-page">
+  <div class="header-left-page">
+    <a href="index.html" class="home-link">Berit Raun</a>
+  </div>
+  <div class="header-right-page"><a href="index.html" class="home-link">Portfolio</a></div>
+</header>
+
+<div class="content-wrapper">
+  <div class="description">
+    <div class="header-page">Männiku Wakepark visual and graphic identity</div>
+    <h3>Graphic design · CVI · Männiku Wakepark · 2025-...</h3>
+    <p>At the start of the 2025 wakeboarding season, Männiku Wakepark (formerly known as Nocco Wakepark) was undergoing a shift in its main sponsorship and returning to its original and most widely used name, Männiku Wakepark. This transition also called for a new visual identity that could represent the park’s renewed direction.</p>
+    <p>The colour palette was inspired by the environment of the quarry itself: the soft tones of the café interior, the deep blue-green water, warm sand, surrounding pine forests and the overall natural setting of the park. An additional influence came from the new main sponsor, Red Bull, whose core colours were integrated into the palette to create a stronger visual impact while still maintaining a connection to the location.</p>
+    <p>I was given creative freedom throughout the entire process, with the wakepark, its people and the community-driven atmosphere serving as the main sources of inspiration. The identity aims to capture the playful, energetic and welcoming spirit of the park.</p>
+    <p>For the logo, Tropical Type’s Castaway typeface was selected in collaboration with the park’s management, as it reflects the beach-like, relaxed and youthful character of the space. Five logo variations were created to ensure flexibility across different formats and applications. The wavy form of the lettering symbolises both the calm surface of the quarry and the waves created by the wakeboarding. Raleway was chosen as the supporting typeface for its clean and modern structure, creating contrast with the expressive logo while maintaining legibility across digital and printed formats.</p>
+    <p>For social media and promotional materials, dynamic wave-shaped borders and silhouettes of local riders were used. These elements highlight the movement of wakeboarding and celebrate the park’s close-knit community, making the riders themselves a central part of the visual language. The identity is designed as an evolving system and continues to develop alongside the park and its community.</p>
+  </div>
+
+
+  <div class="photos-scroll">
+    <img src="Männiku kit.png" alt="Männiku kit" class="landscape">
+    <img src="menüü-02.png" alt="menu">
+    <img src="menüü-03 copy.png" alt="menu">
+    <img src="Last dance fb.png" alt="last dance event" class="landscape">
+    <img src="fb cover.png" alt="fb event" class="landscape">
+    <img src="diplom-01 copy.png" alt="diplom">
+    <img src="summer starter.png" alt="summer starter event">
+    <img src="Sauna reeglid.pdf" alt="Sauna">
+    <img src="MINIRAMPI KAUTAMISE REEGLID.png" alt="miniramp rules">
+    <img src="meelespea.pdf" alt="reminder" class="landscape">
+  </div>
+</div>
+
+<footer class="container-footer">
+  <div class="footer-content">
+    <div class="footer-row">
+      <div class="footer-nav-prev">
+        <a href="Posters.html" class="previous">&lt; Previous</a>
+      </div>
+      <div class="footer-contacts">
+        <a href="http://www.instagram.com/beritraun/" class="instagram">@beritraun</a>
+        <a href="mailto:beritraun1@gmail.com" class="mail">beritraun1@gmail.com</a>
+      </div>
+      <div class="footer-nav-next">
+        <a href="Typefaces.html" class="next">Next &gt;</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <span class="lightbox-prev">
+    <svg width="30" height="50" viewBox="0 0 30 50">
+      <polyline points="25,5 5,25 25,45" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </span>
+  <span class="lightbox-next">
+    <svg width="30" height="50" viewBox="0 0 30 50">
+      <polyline points="5,5 25,25 5,45" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </span>
+  <img class="lightbox-content" id="lightbox-img" alt="">
+</div>
+
+<script>
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const scrollImages = document.querySelectorAll('.photos-scroll img');
+const closeBtn = document.querySelector('.lightbox-close');
+const prevBtn = document.querySelector('.lightbox-prev');
+const nextBtn = document.querySelector('.lightbox-next');
+let currentIndex = 0;
+
+scrollImages.forEach((img, index) => {
+  img.addEventListener('click', function() {
+    currentIndex = index;
+    openLightbox();
+  });
+});
+
+function openLightbox() {
+  lightbox.style.display = 'flex';
+  lightboxImg.src = scrollImages[currentIndex].src;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+function showPrev() {
+  currentIndex = (currentIndex - 1 + scrollImages.length) % scrollImages.length;
+  lightboxImg.src = scrollImages[currentIndex].src;
+}
+
+function showNext() {
+  currentIndex = (currentIndex + 1) % scrollImages.length;
+  lightboxImg.src = scrollImages[currentIndex].src;
+}
+
+closeBtn.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', function(e) {
+  if (e.target === lightbox) closeLightbox();
+});
+prevBtn.addEventListener('click', function(e) { e.stopPropagation(); showPrev(); });
+nextBtn.addEventListener('click', function(e) { e.stopPropagation(); showNext(); });
+
+document.addEventListener('keydown', function(e) {
+  if (lightbox.style.display === 'flex') {
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') showPrev();
+    else if (e.key === 'ArrowRight') showNext();
+  }
+});
+
+lightbox.addEventListener('wheel', function(e) {
+  e.preventDefault();
+  if (e.deltaY > 0) showNext(); else showPrev();
+});
+</script>
+
+</body>
+</html>

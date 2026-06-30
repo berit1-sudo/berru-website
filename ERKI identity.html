@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERKI 2025 – Berit Raun</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="container-page">
+  <div class="header-left-page">
+    <a href="index.html" class="home-link">Berit Raun</a>
+  </div>
+  <div class="header-right-page"><a href="index.html" class="home-link">Portfolio</a></div>
+</header>
+
+<div class="content-wrapper">
+  <div class="description">
+    <div class="header-page">Visual identity concept for ERKI 2025</div>
+    <h3>Graphic design · Event identity concept · EKA student project · 2025</h3>
+    <p>The visual identity for ERKI 2025 came from the central theme of the fashion show: a generation living between freedom and responsibility, always aware that time is running out. The concept uses layered curtains and time strata as a metaphor for shifting boundaries, for what we show and what we keep hidden. Impatience became the starting point, not as frustration, but as a need to be present and heard.</p>
+    <p>With my coursemate Anni Kangur, we developed a visual identity built around flowing fabrics, time as a central motif, and layering as structure. Typography gets stretched and disrupted until it starts to behave like fabric, reflecting the weight of time and emotion. The compositions stack overlapping textures, sharp silhouettes, and fragmented forms to create a sense of movement and transition. We kept most of it in high contrast black and white to stay direct and reduce everything to what really matters.</p>
+    <p>The system is about what you can see and what stays hidden, where layers pile up and type fractures under the weight. It feels restless and in motion, like standing at the eleventh hour, caught between what we reveal and what stays hidden behind the curtains of time.</p>
+  </div>
+
+  <div class="photos-scroll" id="photosScroll">
+    <img src="erki-02.png" alt="First sketches" class="landscape">
+    <img src="erki-04.png" alt="Typography development" class="landscape">
+    <img src="erki-05.png" alt="Scans" class="landscape">
+    <img src="erki-06.png" alt="Second sketches color" class="landscape">
+    <img src="erki-07.png" alt="Second sketches variations" class="landscape">
+    <img src="erki-08.png" alt="Instagram post and story format" class="landscape">
+    <img src="erki-010.png" alt="Facebook event mockup" class="landscape">
+    <img src="erki-10.png" alt="Facebook event format" class="landscape">
+    <img src="erki-11.png" alt="Instagram profile" class="landscape">
+    <img src="erki-13.png" alt="Invite design" class="landscape"> 
+    <img src="erki-15.png" alt="Poster mockup" class="landscape">
+    <img src="erki 16.png" alt="Full formats" class="landscape">
+  </div>
+</div>
+
+<footer class="container-footer">
+  <div class="footer-content">
+    <div class="footer-row">
+      <div class="footer-nav-prev">
+        <a href="first Womens snowboard graphics.html" class="previous">&lt; Previous</a>
+      </div>
+      <div class="footer-contacts">
+        <a href="http://www.instagram.com/beritraun/" class="instagram">@beritraun</a>
+        <a href="mailto:beritraun1@gmail.com" class="mail">beritraun1@gmail.com</a>
+      </div>
+      <div class="footer-nav-next">
+        <a href="Trinkets.html" class="next">next &gt;</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <span class="lightbox-prev">
+    <svg width="30" height="50" viewBox="0 0 30 50">
+      <polyline points="25,5 5,25 25,45" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </span>
+  <span class="lightbox-next">
+    <svg width="30" height="50" viewBox="0 0 30 50">
+      <polyline points="5,5 25,25 5,45" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </span>
+  <img class="lightbox-content" id="lightbox-img" alt="">
+</div>
+
+<script>
+var lightbox = document.getElementById('lightbox');
+var lightboxImg = document.getElementById('lightbox-img');
+var closeBtn = document.querySelector('.lightbox-close');
+var prevBtn = document.querySelector('.lightbox-prev');
+var nextBtn = document.querySelector('.lightbox-next');
+var srcs = [];
+var currentIndex = 0;
+
+window.onload = function() {
+  var imgs = document.querySelectorAll('#photosScroll img');
+  srcs = [];
+  for (var i = 0; i < imgs.length; i++) {
+    srcs.push(imgs[i].getAttribute('src'));
+    (function(idx) {
+      imgs[idx].style.cursor = 'pointer';
+      imgs[idx].addEventListener('click', function() {
+        currentIndex = idx;
+        lightboxImg.src = srcs[currentIndex];
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    })(i);
+  }
+};
+
+closeBtn.addEventListener('click', function() {
+  lightbox.style.display = 'none';
+  document.body.style.overflow = '';
+});
+
+lightbox.addEventListener('click', function(e) {
+  if (e.target === lightbox) {
+    lightbox.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+});
+
+prevBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  currentIndex = (currentIndex - 1 + srcs.length) % srcs.length;
+  lightboxImg.src = srcs[currentIndex];
+});
+
+nextBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  currentIndex = (currentIndex + 1) % srcs.length;
+  lightboxImg.src = srcs[currentIndex];
+});
+
+document.addEventListener('keydown', function(e) {
+  if (lightbox.style.display === 'flex') {
+    if (e.key === 'Escape') { lightbox.style.display = 'none'; document.body.style.overflow = ''; }
+    else if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + srcs.length) % srcs.length; lightboxImg.src = srcs[currentIndex]; }
+    else if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % srcs.length; lightboxImg.src = srcs[currentIndex]; }
+  }
+});
+
+lightbox.addEventListener('wheel', function(e) {
+  e.preventDefault();
+  if (e.deltaY > 0) { currentIndex = (currentIndex + 1) % srcs.length; lightboxImg.src = srcs[currentIndex]; }
+  else { currentIndex = (currentIndex - 1 + srcs.length) % srcs.length; lightboxImg.src = srcs[currentIndex]; }
+});
+</script>
+
+</body>
+</html>

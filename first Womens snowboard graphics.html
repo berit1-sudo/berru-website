@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Women's graphics – Berit Raun</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="container-page">
+  <div class="header-left-page">
+    <a href="index.html" class="home-link">Berit Raun</a>
+  </div>
+  <div class="header-right-page"><a href="index.html" class="home-link">Portfolio</a></div>
+</header>
+
+<div class="content-wrapper">
+  <div class="description">
+    <div class="header-page">The First 4 Women's Pro Models, A Graphic Design Research</div>
+    <h3>Graphic Design · EKA student project · Research · 2025</h3>
+    <p>For my graphic design theory course, I chose to pursue a research-based text rather than a conceptual analysis of my own design practice. The study focuses on the first four pro model snowboards and their graphics made specifically for women, tracing a largely undocumented chapter of snowboard history.</p>
+    <p>What made this research particularly challenging and rewarding was the scarcity of formal sources. Very little has been written about early women's pro, which meant the bulk of my material came from unconventional places: Facebook collector groups, eBay listings and some articles mentioning them. In a way, the research itself became an important part of the story, reminding how easily women's contributions to the snowboarding industry get overlooked or left out of the record.</p>
+    <p>The project sits at the intersection of design history, gender studies, and material culture. Their graphics were visual statements about how the industry chose to represent women at a pivotal moment in snowboarding's commercialization during the late 1980s and early 1990s. </p>
+    <p>The second page of the submission consisted of screenshots documenting my sources, capturing the Facebook group posts, eBay listings, and other online traces that formed the foundation of this small research. Since so much of this material exists in informal and fleeting corners of the internet, screenshotting and preserving it felt like a natural part of the process.</p>
+    <a href="text.pdf" class="pdf-link" target="_blank">Read the full text here →</a>
+  </div>
+
+  <div class="photos-scroll" id="photosScroll" >
+    <img src="leht tekst.jpg" alt="Text" class="landscape">
+    <img src="leht refrence.jpg" alt="Refrence" class="landscape">
+    <img src="kaaned.jpg" alt="Cover">
+    <img src="kaaned kinni.jpg" alt="Cover 2">
+  </div>
+</div>
+
+<footer class="container-footer">
+  <div class="footer-content">
+    <div class="footer-row">
+      <div class="footer-nav-prev">
+        <a href="Typefaces.html" class="previous">&lt; Previous</a>
+      </div>
+      <div class="footer-contacts">
+        <a href="http://www.instagram.com/beritraun/" class="instagram">@beritraun</a>
+         <a href="mailto:beritraun1@gmail.com" class="mail">beritraun1@gmail.com</a>
+      </div>
+      <div class="footer-nav-next">
+        <a href="ERKI identity.html" class="next">next &gt;</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <span class="lightbox-prev">
+    <svg width="30" height="50" viewBox="0 0 30 50">
+      <polyline points="25,5 5,25 25,45" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </span>
+  <span class="lightbox-next">
+    <svg width="30" height="50" viewBox="0 0 30 50">
+      <polyline points="5,5 25,25 5,45" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </span>
+  <img class="lightbox-content" id="lightbox-img" alt="">
+</div>
+
+<script>
+var lightbox = document.getElementById('lightbox');
+var lightboxImg = document.getElementById('lightbox-img');
+var closeBtn = document.querySelector('.lightbox-close');
+var prevBtn = document.querySelector('.lightbox-prev');
+var nextBtn = document.querySelector('.lightbox-next');
+var srcs = [];
+var currentIndex = 0;
+
+window.onload = function() {
+  var imgs = document.querySelectorAll('#photosScroll img');
+  srcs = [];
+  for (var i = 0; i < imgs.length; i++) {
+    srcs.push(imgs[i].getAttribute('src'));
+    (function(idx) {
+      imgs[idx].style.cursor = 'pointer';
+      imgs[idx].addEventListener('click', function() {
+        currentIndex = idx;
+        lightboxImg.src = srcs[currentIndex];
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    })(i);
+  }
+};
+
+closeBtn.addEventListener('click', function() {
+  lightbox.style.display = 'none';
+  document.body.style.overflow = '';
+});
+
+lightbox.addEventListener('click', function(e) {
+  if (e.target === lightbox) {
+    lightbox.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+});
+
+prevBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  currentIndex = (currentIndex - 1 + srcs.length) % srcs.length;
+  lightboxImg.src = srcs[currentIndex];
+});
+
+nextBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  currentIndex = (currentIndex + 1) % srcs.length;
+  lightboxImg.src = srcs[currentIndex];
+});
+
+document.addEventListener('keydown', function(e) {
+  if (lightbox.style.display === 'flex') {
+    if (e.key === 'Escape') { lightbox.style.display = 'none'; document.body.style.overflow = ''; }
+    else if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + srcs.length) % srcs.length; lightboxImg.src = srcs[currentIndex]; }
+    else if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % srcs.length; lightboxImg.src = srcs[currentIndex]; }
+  }
+});
+
+lightbox.addEventListener('wheel', function(e) {
+  e.preventDefault();
+  if (e.

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typefaces – Berit Raun</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="container-page">
+  <div class="header-left-page">
+    <a href="index.html" class="home-link">Berit Raun</a>
+  </div>
+  <div class="header-right-page"><a href="index.html" class="home-link">Portfolio</a></div>
+</header>
+
+<div class="content-wrapper">
+  <div class="description">
+    <div class="header-page">Typefaces</div>
+    <h3>Graphic design · Type Design · EKA Student Project · 2024/25</h3>
+    <p>Blahblah is a typeface made in 2024. Its pixelated glyphs and the combination of serif and calligraphic letters sit right on the line between digital and analog. The structure is digital and rigid, but it has kinks and grooves woven in like handwriting would. The typeface plays with contrast. Some letters feel formal and measured, while others tilt or break. It's built on a grid but refuses to stay there completely, giving it a restless quality. The pixelation pulls from nostalgia and early digital aesthetics while the calligraphic elements ground it and turn it into something more human. </p>
+    <p>Mistakes came out of our first typography class at EKA, where we were given complete freedom with one requirement: create a typeface. I've always been drawn to calligraphic letterforms, so I decided to try drawing them with a pencil for the first time. Too much caffeine meant my hands were shaking, and the letters came out jagged and uneven. Rather than starting over, I chose to lean into the mistake and let it inform the direction of the work. The typeface reflects a broader pattern in my design practice. I begin with a concept, engage with something that interests me, make mistakes, and instead of removing them I allow them to remain and contribute to the outcome. Some of my favorite projects have emerged from this approach, and Mistakes is one of them. The trembling lines became structural rather than accidental, and the imperfections shifted into something intentional. The typeface was later traced and sewn into a pillow as a way to capture the delicate but shaky quality of the letterforms, created for the final showcase of our class typefaces.
+</p>
+  </div>
+
+  <div class="photos-scroll">
+    <!-- TODO: HOST EXTERNALLY — blahblah specimen 1.pdf ~25MB PDF, needs external hosting (link as download or embed via viewer) -->
+    <!-- TODO: HOST EXTERNALLY — blahblah specimen 2.pdf ~49MB PDF, needs external hosting (link as download or embed via viewer) -->
+    <img src="Häid jõule.jpg" alt="Mistakes specimen" class="landscape">
+    <!-- TODO: MISSING FILE — padi (no extension, file not found in source folder) -->
+  </div>
+</div>
+
+<footer class="container-footer">
+  <div class="footer-content">
+    <div class="footer-row">
+      <div class="footer-nav-prev">
+        <a href="Männiku visuals.html" class="previous">&lt; Previous</a>
+      </div>
+      <div class="footer-contacts">
+        <a href="http://www.instagram.com/beritraun/" class="instagram">@beritraun</a>
+        <a href="mailto:beritraun1@gmail.com" class="mail">beritraun1@gmail.com</a>
+      </div>
+      <div class="footer-nav-next">
+       <a href="first Womens snowboard graphics.html" class="next">next &gt;</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <span class="lightbox-prev">
+    <svg width="30" height="50" viewBox="0 0 30 50">
+      <polyline points="25,5 5,25 25,45" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </span>
+  <span class="lightbox-next">
+    <svg width="30" height="50" viewBox="0 0 30 50">
+      <polyline points="5,5 25,25 5,45" fill="none" stroke="currentColor" stroke-width="2"/>
+    </svg>
+  </span>
+  <img class="lightbox-content" id="lightbox-img" alt="">
+</div>
+
+<script>
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const scrollImages = document.querySelectorAll('.photos-scroll img');
+const closeBtn = document.querySelector('.lightbox-close');
+const prevBtn = document.querySelector('.lightbox-prev');
+const nextBtn = document.querySelector('.lightbox-next');
+let currentIndex = 0;
+
+scrollImages.forEach((img, index) => {
+  img.style.cursor = 'pointer';
+  img.addEventListener('click', function(e) {
+    e.stopPropagation();
+    currentIndex = index;
+    openLightbox();
+  });
+});
+
+function openLightbox() {
+  lightbox.style.display = 'flex';
+  lightboxImg.src = scrollImages[currentIndex].src;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+function showPrev() {
+  currentIndex = (currentIndex - 1 + scrollImages.length) % scrollImages.length;
+  lightboxImg.src = scrollImages[currentIndex].src;
+}
+
+function showNext() {
+  currentIndex = (currentIndex + 1) % scrollImages.length;
+  lightboxImg.src = scrollImages[currentIndex].src;
+}
+
+closeBtn.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', function(e) {
+  if (e.target === lightbox) closeLightbox();
+});
+prevBtn.addEventListener('click', function(e) { e.stopPropagation(); showPrev(); });
+nextBtn.addEventListener('click', function(e) { e.stopPropagation(); showNext(); });
+
+document.addEventListener('keydown', function(e) {
+  if (lightbox.style.display === 'flex') {
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') showPrev();
+    else if (e.key === 'ArrowRight') showNext();
+  }
+});
+
+lightbox.addEventListener('wheel', function(e) {
+  e.preventDefault();
+  if (e.deltaY > 0) showNext(); else showPrev();
+});
+</script>
+
+</body>
+</html>
