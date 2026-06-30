@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Coming Soon</title>
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #0a0a0a;
+        --text: #f0f0f0;
+        --muted: #666;
+        --accent: #e8e0d5;
+      }
+
+      html, body {
+        height: 100%;
+      }
+
+      body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: 'Georgia', 'Times New Roman', serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      .container {
+        text-align: center;
+        max-width: 520px;
+      }
+
+      .wordmark {
+        font-size: 0.75rem;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 4rem;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-weight: 400;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+        color: var(--muted);
+        line-height: 1.7;
+        letter-spacing: 0.01em;
+      }
+
+      .line {
+        width: 40px;
+        height: 1px;
+        background: var(--muted);
+        margin: 2.5rem auto;
+        opacity: 0.4;
+      }
+
+      .footer {
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        opacity: 0.5;
+        margin-top: 4rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wordmark">Berru</div>
+      <h1>Something<br />is coming.</h1>
+      <div class="line"></div>
+      <p>We're working on it.<br />Check back soon.</p>
+      <div class="footer">&copy; 2026</div>
+    </div>
+  </body>
+</html>
